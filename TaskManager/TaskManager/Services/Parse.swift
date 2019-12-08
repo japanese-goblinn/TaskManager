@@ -19,23 +19,27 @@ class Parse {
             print("Received error:", error)
         } as? XPCServiceProtocol
         
-        service?.request(command: "/usr/bin/top", with: ["-l", "1"]) {
-            result in
+        service?.kill(by: 88532)
         
-            parseTop(value: result)
-        }
-        
-        service?.request(command: "/bin/ps", with: ["aux", "-c"]) {
-            result in
-            
-            parsePs(value: result)
-        }
+//        service?.request(command: "/usr/bin/top", with: ["-l", "1"]) {
+//            result in
+//
+//            parseTop(value: result)
+//        }
+//
+//        service?.request(command: "/bin/ps", with: ["aux", "-c"]) {
+//            result in
+//
+//            parsePs(value: result)
+//        }
 
 //        while (true) {
-//            service?.requestProcessesInfo { result in
-//                parse(value: result)
+//            service?.request(command: "/usr/bin/top", with: ["-l", "1"]) {
+//                result in
+//
+//                parseTop(value: result)
 //            }
-//            sleep(2)
+//            sleep(1)
 //        }
     }
     
