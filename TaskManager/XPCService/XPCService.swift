@@ -9,10 +9,11 @@
 import Foundation
 
 class XPCService: NSObject, XPCServiceProtocol {
-    func requestProcessesInfo(completion: @escaping (String) -> Void) {
+    
+    func request(command: String, with arguments: [String], completion: @escaping ([String]) -> Void) {
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/top")
-        process.arguments = ["-l", "1"]
+        process.executableURL = URL(fileURLWithPath: command)
+        process.arguments = arguments
         let outputPipe = Pipe()
         process.standardOutput = outputPipe
         do {
@@ -20,6 +21,13 @@ class XPCService: NSObject, XPCServiceProtocol {
         } catch {
             print(error.localizedDescription)
         }
-        completion(String(decoding: outputPipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self))
+        completion(
+            String(
+                decoding: outputPipe.fileHandleForReading.readDataToEndOfFile(),
+                as: UTF8.self
+            )
+            .components(separatedBy: .newlines)
+            .filter { $0 != "" }
+        )
     }
 }

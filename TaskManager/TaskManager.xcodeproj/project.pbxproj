@@ -18,6 +18,8 @@
 		CEA9CDCD239D633C00622687 /* XPCService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = CEA9CDC2239D633C00622687 /* XPCService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CEA9CDD1239D669100622687 /* XPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDC5239D633C00622687 /* XPCService.swift */; };
 		CEA9CDD2239D669500622687 /* XPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDC4239D633C00622687 /* XPCServiceProtocol.swift */; };
+		CEA9CDD4239D767200622687 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDD3239D767200622687 /* SystemInfo.swift */; };
+		CEA9CDD6239D769900622687 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDD5239D769900622687 /* Process.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		CEA9CDC6239D633C00622687 /* XPCServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCServiceDelegate.swift; sourceTree = "<group>"; };
 		CEA9CDC8239D633C00622687 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CEA9CDCA239D633C00622687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEA9CDD3239D767200622687 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
+		CEA9CDD5239D769900622687 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Process.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,27 +84,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE207C8F239CFC9D003E4C04 /* Model */ = {
+		CE207C8F239CFC9D003E4C04 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CE207C8D239BFEAA003E4C04 /* Parse.swift */,
+				CEA9CDD3239D767200622687 /* SystemInfo.swift */,
+				CEA9CDD5239D769900622687 /* Process.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		CE207C90239CFCB6003E4C04 /* View */ = {
+		CE207C90239CFCB6003E4C04 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CE7B4C02239AEA3700E336FE /* ContentView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		CE207C91239D14E5003E4C04 /* Service */ = {
+		CE207C91239D14E5003E4C04 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CE207C8D239BFEAA003E4C04 /* Parse.swift */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		CE7B4BF4239AEA3600E336FE = {
@@ -124,9 +130,9 @@
 		CE7B4BFF239AEA3600E336FE /* TaskManager */ = {
 			isa = PBXGroup;
 			children = (
-				CE207C91239D14E5003E4C04 /* Service */,
-				CE207C8F239CFC9D003E4C04 /* Model */,
-				CE207C90239CFCB6003E4C04 /* View */,
+				CE207C91239D14E5003E4C04 /* Services */,
+				CE207C8F239CFC9D003E4C04 /* Models */,
+				CE207C90239CFCB6003E4C04 /* Views */,
 				CE7B4C00239AEA3700E336FE /* AppDelegate.swift */,
 				CE7B4C04239AEA3F00E336FE /* Assets.xcassets */,
 				CE7B4C09239AEA3F00E336FE /* Main.storyboard */,
@@ -258,6 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA9CDD4239D767200622687 /* SystemInfo.swift in Sources */,
+				CEA9CDD6239D769900622687 /* Process.swift in Sources */,
 				CE207C8E239BFEAA003E4C04 /* Parse.swift in Sources */,
 				CE7B4C03239AEA3700E336FE /* ContentView.swift in Sources */,
 				CE7B4C01239AEA3700E336FE /* AppDelegate.swift in Sources */,

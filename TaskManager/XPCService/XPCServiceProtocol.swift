@@ -9,5 +9,7 @@
 import Foundation
 
 @objc public protocol XPCServiceProtocol {
-    func requestProcessesInfo(completion: @escaping (String) -> Void)
+    
+    func request(command: String, with arguments: [String], completion: @escaping ([String]) -> Void)
+
 }
