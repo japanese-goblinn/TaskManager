@@ -20,6 +20,8 @@
 		CEA9CDD2239D669500622687 /* XPCServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDC4239D633C00622687 /* XPCServiceProtocol.swift */; };
 		CEA9CDD4239D767200622687 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDD3239D767200622687 /* SystemInfo.swift */; };
 		CEA9CDD6239D769900622687 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDD5239D769900622687 /* Process.swift */; };
+		CEA9CDD9239E739500622687 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDD8239E739500622687 /* StringExtension.swift */; };
+		CEA9CDDB239E73B700622687 /* NSRegualarExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDDA239E73B700622687 /* NSRegualarExpressionExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		CEA9CDCA239D633C00622687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA9CDD3239D767200622687 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		CEA9CDD5239D769900622687 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Process.swift; sourceTree = "<group>"; };
+		CEA9CDD8239E739500622687 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		CEA9CDDA239E73B700622687 /* NSRegualarExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegualarExpressionExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,7 @@
 		CE7B4BFF239AEA3600E336FE /* TaskManager */ = {
 			isa = PBXGroup;
 			children = (
+				CEA9CDD7239E737000622687 /* Extensions */,
 				CE207C91239D14E5003E4C04 /* Services */,
 				CE207C8F239CFC9D003E4C04 /* Models */,
 				CE207C90239CFCB6003E4C04 /* Views */,
@@ -161,6 +166,15 @@
 				CEA9CDCA239D633C00622687 /* Info.plist */,
 			);
 			path = XPCService;
+			sourceTree = "<group>";
+		};
+		CEA9CDD7239E737000622687 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CEA9CDD8239E739500622687 /* StringExtension.swift */,
+				CEA9CDDA239E73B700622687 /* NSRegualarExpressionExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +280,8 @@
 			files = (
 				CEA9CDD4239D767200622687 /* SystemInfo.swift in Sources */,
 				CEA9CDD6239D769900622687 /* Process.swift in Sources */,
+				CEA9CDD9239E739500622687 /* StringExtension.swift in Sources */,
+				CEA9CDDB239E73B700622687 /* NSRegualarExpressionExtension.swift in Sources */,
 				CE207C8E239BFEAA003E4C04 /* Parse.swift in Sources */,
 				CE7B4C03239AEA3700E336FE /* ContentView.swift in Sources */,
 				CE7B4C01239AEA3700E336FE /* AppDelegate.swift in Sources */,
