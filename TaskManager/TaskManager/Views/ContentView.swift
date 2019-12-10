@@ -19,31 +19,15 @@ struct ContentView: View {
         TabView {
             VStack {
                 Text("CPU usage")
-                .fontWeight(.heavy)
-                .foregroundColor(.gray)
-                
+                    .fontWeight(.heavy)
+                    .foregroundColor(.gray)
                 Divider()
-                Text(
-                    String(
-                        format: "System: %.2f",
-                        viewModel.sysInfo?.systemPercentageUsage ?? 0
-                    ) + "%"
-                )
-                .bold()
-                Text(
-                    String(
-                        format: "User: %.2f",
-                        viewModel.sysInfo?.userPercentageUsage ?? 0
-                    ) + "%"
-                )
-                .bold()
-                Text(
-                    String(
-                        format: "Idle: %.2f",
-                        viewModel.sysInfo?.idlePercentageUsage ?? 0
-                    ) + "%"
-                )
-                .bold()
+                Text(viewModel.percentageUsage(for: .system))
+                    .bold()
+                Text(viewModel.percentageUsage(for: .user))
+                    .bold()
+                Text(viewModel.percentageUsage(for: .idle))
+                    .bold()
                 Spacer()
                 LineChartViewControllerWrapper(viewModel: viewModel)
             }
@@ -57,7 +41,7 @@ struct ContentView: View {
                 ProcessesViewControllerWrapper()
             }
             .tabItem {
-                  Text("Processes")
+                Text("Processes")
             }
             .tag(1)
         }
@@ -73,9 +57,35 @@ struct ContentView: View {
 
 class ViewModel: ObservableObject {
       
-      @Published private(set) var sysInfo: SystemInfo? = nil
+    @Published private(set) var sysInfo: SystemInfo? = nil
+    
+    enum Info {
+        case system
+        case user
+        case idle
+    }
       
-      func observingSystemInfo() {
+    func percentageUsage(for type: Info) -> String {
+        switch type {
+        case .system:
+            return String(
+                format: "System: %.2f",
+                sysInfo?.systemPercentageUsage ?? 0
+            ) + "%"
+        case .user:
+            return String(
+                format: "User: %.2f",
+                sysInfo?.userPercentageUsage ?? 0
+            ) + "%"
+        case .idle:
+            return String(
+                format: "Idle: %.2f",
+                sysInfo?.idlePercentageUsage ?? 0
+            ) + "%"
+        }
+    }
+
+    func observingSystemInfo() {
         DispatchQueue.global().async {
             Parse.getSystemInfoOutput(sleep: 2) { sysInfo in
                 DispatchQueue.main.async {
@@ -83,9 +93,8 @@ class ViewModel: ObservableObject {
                 }
             }
         }
-      }
-  }
-
+    }
+}
 
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {

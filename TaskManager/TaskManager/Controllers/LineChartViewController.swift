@@ -78,6 +78,7 @@ final class LineChartViewController: NSViewController
         lineChartView.xAxis.enabled = false
         let y = lineChartView.leftAxis
         y.axisMaximum = 100
+        y.axisMinimum = 0
 
         let data = LineChartData()
         data.addDataSet(sysLine)
