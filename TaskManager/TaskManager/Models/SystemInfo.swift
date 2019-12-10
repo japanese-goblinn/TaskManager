@@ -12,4 +12,21 @@ struct SystemInfo {
     let userPercentageUsage: Float
     let systemPercentageUsage: Float
     let idlePercentageUsage: Float
+    
+    init(with value: Float) {
+        userPercentageUsage = value
+        systemPercentageUsage = value
+        idlePercentageUsage = value
+    }
+    
+    init(
+        userPercentageUsage: Float,
+        systemPercentageUsage: Float,
+        idlePercentageUsage: Float
+    ) {
+        self.userPercentageUsage = userPercentageUsage
+        self.systemPercentageUsage = systemPercentageUsage
+        self.idlePercentageUsage = idlePercentageUsage
+    }
+    
 }

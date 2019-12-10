@@ -12,66 +12,76 @@ import Charts
 
 final class LineChartViewController: NSViewController
 {
-    @IBOutlet var barChartView: BarChartView!
+    @IBOutlet var lineChartView: LineChartView!
     
-    private lazy var sysUsage = [SystemInfo]()
+    private lazy var sysUsage = [SystemInfo](
+        repeating: SystemInfo(with: 0),
+        count: 10
+    )
     
-    var lastSystemInfo: SystemInfo = SystemInfo(
-        userPercentageUsage: 0, systemPercentageUsage: 0, idlePercentageUsage: 100
-    ) {
-        
+    var lastSystemInfo: SystemInfo = SystemInfo(with: 0) {
         willSet {
-            if sysUsage.count == 10 {
-                sysUsage = sysUsage.dropFirst(1).map { $0 }
-            }
+            sysUsage = sysUsage.dropFirst(1).map { $0 }
             sysUsage.append(newValue)
-            dump(sysUsage)
+            updateChart()
         }
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        let xArray = Array(1..<10)
-        print(xArray.count)
-        let ys1 = xArray.map { x in return sin(Double(x) / 2.0 / 3.141 * 1.5) }
-        let ys2 = xArray.map { x in return cos(Double(x) / 2.0 / 3.141) }
-        
-        let yse1 = ys1.enumerated().map { x, y in return BarChartDataEntry(x: Double(x), y: y) }
-        let yse2 = ys2.enumerated().map { x, y in return BarChartDataEntry(x: Double(x), y: y) }
-        
-        let data = BarChartData()
-        let ds1 = BarChartDataSet(entries: yse1, label: "System")
-        ds1.colors = [.red]
-        data.addDataSet(ds1)
-
-        let ds2 = BarChartDataSet(entries: yse2, label: "User")
-        ds2.colors = [.blue]
-        data.addDataSet(ds2)
-
-        let barWidth = 0.4
-        let barSpace = 0.05
-        let groupSpace = 0.1
-        
-        data.barWidth = barWidth
-        self.barChartView.xAxis.axisMinimum = Double(xArray[0])
-        self.barChartView.xAxis.axisMaximum = Double(xArray[0]) + data.groupWidth(groupSpace: groupSpace, barSpace: barSpace) * Double(xArray.count)
-        // (0.4 + 0.05) * 2 (data set count) + 0.1 = 1
-        data.groupBars(fromX: Double(xArray[0]), groupSpace: groupSpace, barSpace: barSpace)
-
-        self.barChartView.data = data
-    
-        self.barChartView.gridBackgroundColor = .clear
-        
+        updateChart()
     }
     
     override func viewWillAppear()
     {
-        self.barChartView.animate(xAxisDuration: 0.0, yAxisDuration: 1.0)
+        self.lineChartView.animate(yAxisDuration: 0.5)
     }
     
-    private func setChart() {
+    private func createPlot(
+        from data: [ChartDataEntry], with color: NSColor, and label: String
+    ) -> LineChartDataSet {
         
+        let line = LineChartDataSet(entries: data, label: label)
+        line.mode = .cubicBezier
+        line.cubicIntensity = 0.2
+        line.fill = Fill(color: color)
+        line.colors = [color]
+        line.drawFilledEnabled = true
+        line.drawCirclesEnabled = false
+        line.drawValuesEnabled = false
+        return line
+    }
+    
+    private func updateChart() {
+        let sysLine = createPlot(
+            from: sysUsage
+                .enumerated()
+                .map {
+                    ChartDataEntry(x: Double($0), y: Double($1.systemPercentageUsage))
+                },
+            with: .systemRed,
+            and: "System"
+        )
+        
+        let userLine = createPlot(
+            from: sysUsage
+                .enumerated()
+                .map {
+                    ChartDataEntry(x: Double($0), y: Double($1.userPercentageUsage))
+                },
+            with: .systemBlue,
+            and: "User"
+        )
+        
+        lineChartView.rightAxis.enabled = false
+        lineChartView.xAxis.enabled = false
+        let y = lineChartView.leftAxis
+        y.axisMaximum = 100
+
+        let data = LineChartData()
+        data.addDataSet(sysLine)
+        data.addDataSet(userLine)
+        lineChartView.data = data
     }
 }

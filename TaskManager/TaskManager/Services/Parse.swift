@@ -13,7 +13,9 @@ class Parse {
     
     private static var regex = try? NSRegularExpression(pattern: "[0-9]{1,3}.[0-9]{1,}%")
     
-    static func getSystemInfoOutput(complition: @escaping (SystemInfo) -> Void) {
+    static func getSystemInfoOutput(
+        sleep value: UInt32, complition: @escaping (SystemInfo) -> Void
+    ) {
         let connection = NSXPCConnection(serviceName: "saisuicied.XPCService")
         connection.remoteObjectInterface = NSXPCInterface(with: XPCServiceProtocol.self)
         connection.resume()
@@ -27,7 +29,7 @@ class Parse {
 
                 complition(parseTop(value: result))
             }
-            sleep(2)
+            sleep(value)
         }
         
 //        service?.kill(by: 88532)

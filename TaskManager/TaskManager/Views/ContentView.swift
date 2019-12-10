@@ -14,10 +14,15 @@ import Cocoa
 struct ContentView: View {
     
     @ObservedObject var viewModel = ViewModel()
-    
+
     var body: some View {
         TabView {
             VStack {
+                Text("CPU usage")
+                .fontWeight(.heavy)
+                .foregroundColor(.gray)
+                
+                Divider()
                 Text(
                     String(
                         format: "System: %.2f",
@@ -45,6 +50,7 @@ struct ContentView: View {
             .tabItem {
                 Text("System Info")
             }
+            .background(Color.white)
             .tag(0)
             
             VStack {
@@ -55,11 +61,14 @@ struct ContentView: View {
             }
             .tag(1)
         }
+        .padding()
+        .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             self.viewModel.observingSystemInfo()
         }
     }
+    
 }
 
 class ViewModel: ObservableObject {
@@ -68,7 +77,7 @@ class ViewModel: ObservableObject {
       
       func observingSystemInfo() {
         DispatchQueue.global().async {
-            Parse.getSystemInfoOutput { sysInfo in
+            Parse.getSystemInfoOutput(sleep: 2) { sysInfo in
                 DispatchQueue.main.async {
                     self.sysInfo = sysInfo
                 }
