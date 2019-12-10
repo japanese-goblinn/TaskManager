@@ -9,7 +9,7 @@
 import Foundation
 
 struct SystemInfo {
-    let userUsage: String
-    let systemUsage: String
-    let idleUsage: String
+    let userPercentageUsage: Float
+    let systemPercentageUsage: Float
+    let idlePercentageUsage: Float
 }

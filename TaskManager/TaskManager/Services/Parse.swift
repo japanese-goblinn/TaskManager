@@ -13,14 +13,22 @@ class Parse {
     
     private static var regex = try? NSRegularExpression(pattern: "[0-9]{1,3}.[0-9]{1,}%")
     
-    static func getOutput() {
+    static func getSystemInfoOutput(complition: @escaping (SystemInfo) -> Void) {
         let connection = NSXPCConnection(serviceName: "saisuicied.XPCService")
         connection.remoteObjectInterface = NSXPCInterface(with: XPCServiceProtocol.self)
         connection.resume()
-        
         let service = connection.remoteObjectProxyWithErrorHandler { error in
             print("Received error:", error)
         } as? XPCServiceProtocol
+        
+        while (true) {
+            service?.request(command: "/usr/bin/top", with: ["-l", "1"]) {
+                result in
+
+                complition(parseTop(value: result))
+            }
+            sleep(2)
+        }
         
 //        service?.kill(by: 88532)
         
@@ -30,22 +38,17 @@ class Parse {
 //
 //            parsePs(value: result)
 //        }
-
-        while (true) {
-            service?.request(command: "/usr/bin/top", with: ["-l", "1"]) {
-                result in
-                
-                parseTop(value: result)
-            }
-            sleep(1)
-        }
     }
     
-    private static func parseTop(value: [String]) {
+    private static func parseTop(value: [String]) -> SystemInfo {
         let info = value.prefix(10)[3]
         guard let regex = Parse.regex else { fatalError("REGEX ERROR") }
-        let result = regex.match(this: info)
-        dump(SystemInfo(userUsage: result[0], systemUsage: result[1], idleUsage: result[2]))
+        let result = regex.match(this: info).map { $0.dropLast() }
+        return SystemInfo(
+            userPercentageUsage: Float(result[0])!,
+            systemPercentageUsage: Float(result[1])!,
+            idlePercentageUsage: Float(result[2])!
+        )
     }
     
     private static func parsePs(value: [String]) {
