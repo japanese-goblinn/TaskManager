@@ -9,7 +9,7 @@
 import Cocoa
 import SwiftUI
 
-class SystemInfoCoordinator: NSObject {
+class SystemCoordinator: NSObject {
     var data: ViewModel
 
     init(data: ViewModel) {
@@ -36,8 +36,8 @@ struct LineChartViewControllerWrapper: NSViewControllerRepresentable {
         nsViewController.lastSystemInfo = value
     }
     
-    func makeCoordinator() -> SystemInfoCoordinator {
-        SystemInfoCoordinator(data: viewModel)
+    func makeCoordinator() -> SystemCoordinator {
+        SystemCoordinator(data: viewModel)
     }
     
 }

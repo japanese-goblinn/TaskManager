@@ -55,8 +55,9 @@ struct ContentView: View {
     
 }
 
+
 class ViewModel: ObservableObject {
-      
+    
     @Published private(set) var sysInfo: SystemInfo? = nil
     
     enum Info {
@@ -84,12 +85,12 @@ class ViewModel: ObservableObject {
             ) + "%"
         }
     }
-
+    
     func observingSystemInfo() {
         DispatchQueue.global().async {
-            Parse.getSystemInfoOutput(sleep: 2) { sysInfo in
-                DispatchQueue.main.async {
-                    self.sysInfo = sysInfo
+            Service.systemInfoOutput(sleep: 2) { sysInfo in
+                DispatchQueue.main.async { [weak self] in
+                    self?.sysInfo = sysInfo
                 }
             }
         }

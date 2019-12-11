@@ -24,7 +24,11 @@ class XPCService: NSObject, XPCServiceProtocol {
         }
     }
     
-    func request(command: String, with arguments: [String], completion: @escaping ([String]) -> Void) {
+    func request(
+        command: String,
+        with arguments: [String],
+        completion: @escaping ([String]) -> Void
+    ) {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: command)
         process.arguments = arguments
