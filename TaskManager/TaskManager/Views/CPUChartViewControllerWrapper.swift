@@ -17,20 +17,20 @@ class SystemCoordinator: NSObject {
     }
 }
 
-struct LineChartViewControllerWrapper: NSViewControllerRepresentable {
+struct CPUChartViewControllerWrapper: NSViewControllerRepresentable {
     
     @ObservedObject var viewModel: ViewModel
     
-    typealias NSViewControllerType = LineChartViewController
-    typealias LineChartContext = NSViewControllerRepresentableContext<LineChartViewControllerWrapper>
+    typealias NSViewControllerType = CPUChartViewController
+    typealias LineChartContext = NSViewControllerRepresentableContext<CPUChartViewControllerWrapper>
     
-    func makeNSViewController(context: LineChartContext) -> LineChartViewController {
+    func makeNSViewController(context: LineChartContext) -> CPUChartViewController {
         
-        LineChartViewController()
+        CPUChartViewController()
     }
         
     func updateNSViewController(
-        _ nsViewController: LineChartViewController, context: LineChartContext
+        _ nsViewController: CPUChartViewController, context: LineChartContext
     ) {
         guard let value = viewModel.sysInfo else { return }
         nsViewController.lastSystemInfo = value

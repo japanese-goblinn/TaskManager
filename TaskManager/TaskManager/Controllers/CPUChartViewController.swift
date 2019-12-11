@@ -10,9 +10,16 @@ import Foundation
 import Cocoa
 import Charts
 
-final class LineChartViewController: NSViewController
+
+class CPUChartViewController: NSViewController
 {
     @IBOutlet var lineChartView: LineChartView!
+    
+    private class CustomYAxisFormatter: IAxisValueFormatter {
+        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+            return "\(Int(value))%"
+        }
+    }
     
     private lazy var sysUsage = [SystemInfo](
         repeating: SystemInfo(with: 0),
@@ -30,12 +37,24 @@ final class LineChartViewController: NSViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        setUpPlot()
         updateChart()
     }
     
     override func viewWillAppear()
     {
         self.lineChartView.animate(yAxisDuration: 0.5)
+    }
+    
+    private func setUpPlot() {
+        lineChartView.rightAxis.enabled = false
+        lineChartView.xAxis.enabled = false
+        lineChartView.leftAxis.labelTextColor = .white
+        lineChartView.legend.textColor = .white
+        let y = lineChartView.leftAxis
+        y.valueFormatter = CustomYAxisFormatter()
+        y.axisMaximum = 100
+        y.axisMinimum = 0
     }
     
     private func createPlot(
@@ -73,13 +92,6 @@ final class LineChartViewController: NSViewController
             with: .systemBlue,
             and: "User"
         )
-        
-        lineChartView.rightAxis.enabled = false
-        lineChartView.xAxis.enabled = false
-        let y = lineChartView.leftAxis
-        y.axisMaximum = 100
-        y.axisMinimum = 0
-
         let data = LineChartData()
         data.addDataSet(sysLine)
         data.addDataSet(userLine)

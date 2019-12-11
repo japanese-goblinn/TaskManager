@@ -35,6 +35,8 @@ class ProcessesViewController: NSViewController {
     }
     
     @objc private func onRowClicked() {
+        guard processes?.indices.contains(tableView.selectedRow) ?? false
+            else { return }
         let index = tableView.selectedRow
         lastSelectedProcess = processes?[index]
     }

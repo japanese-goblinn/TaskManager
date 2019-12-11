@@ -18,23 +18,60 @@ struct ContentView: View {
     var body: some View {
         TabView {
             VStack {
-                Text("CPU usage")
-                    .fontWeight(.heavy)
-                    .foregroundColor(.gray)
-                Divider()
-                Text(viewModel.percentageUsage(for: .system))
-                    .bold()
-                Text(viewModel.percentageUsage(for: .user))
-                    .bold()
-                Text(viewModel.percentageUsage(for: .idle))
-                    .bold()
-                Spacer()
-                LineChartViewControllerWrapper(viewModel: viewModel)
+                VStack(alignment: .leading) {
+                    Text("Info")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("CPU")
+                            .font(.headline)
+                            .bold()
+                            .padding(.top)
+                            .padding(.leading)
+                        Divider()
+                        Text(viewModel.percentageUsage(for: .system))
+                            .bold()
+                            .padding(.leading)
+                        Text(viewModel.percentageUsage(for: .user))
+                            .bold()
+                            .padding(.top)
+                            .padding(.leading)
+                        Text(viewModel.percentageUsage(for: .idle))
+                            .bold()
+                            .padding(.top)
+                            .padding(.bottom)
+                            .padding(.leading)
+                    }
+                    .background(Color(red: 47/255, green: 48/255, blue: 50/255))
+                    .cornerRadius(25)
+                    .padding(.top)
+                    .padding(.bottom)
+                }
+                .padding()
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("CPU Usage")
+                            .font(.title)
+                            .fontWeight(.bold)
+                        Divider()
+                        Spacer()
+                        CPUChartViewControllerWrapper(viewModel: viewModel)
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Memory Usage")
+                            .font(.title)
+                            .fontWeight(.bold)
+                        Divider()
+                        Spacer()
+                        
+                    }
+                }
+                .padding()
             }
             .tabItem {
                 Text("System Info")
             }
-            .background(Color.white)
             .tag(0)
             
             VStack {
@@ -46,13 +83,11 @@ struct ContentView: View {
             .tag(1)
         }
         .padding()
-        .background(Color.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             self.viewModel.observingSystemInfo()
         }
     }
-    
 }
 
 
