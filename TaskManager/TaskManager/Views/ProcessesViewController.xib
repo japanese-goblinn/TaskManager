@@ -18,13 +18,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFq-X3-l0U">
-                    <rect key="frame" x="0.0" y="0.0" width="784" height="475"/>
+                    <rect key="frame" x="0.0" y="33" width="784" height="442"/>
                     <clipView key="contentView" id="Prp-oI-Zd8">
-                        <rect key="frame" x="1" y="0.0" width="782" height="474"/>
+                        <rect key="frame" x="1" y="0.0" width="782" height="441"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="jKj-Sx-GGN" viewBased="YES" id="WbF-qC-6Ct">
-                                <rect key="frame" x="0.0" y="0.0" width="782" height="449"/>
+                                <rect key="frame" x="0.0" y="0.0" width="782" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -32,7 +32,7 @@
                                 <tableColumns>
                                     <tableColumn width="53" minWidth="40" maxWidth="1000" id="0Om-56-jfK">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PID">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -65,7 +65,7 @@
                                     </tableColumn>
                                     <tableColumn width="231" minWidth="40" maxWidth="1000" id="Rg4-CU-NiX">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -98,7 +98,7 @@
                                     </tableColumn>
                                     <tableColumn width="45" minWidth="10" maxWidth="3.4028234663852886e+38" id="HpN-91-qwq">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="% CPU">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -131,7 +131,7 @@
                                     </tableColumn>
                                     <tableColumn width="62" minWidth="10" maxWidth="3.4028234663852886e+38" id="OAh-4W-Lb7">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="CPU Time">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -164,7 +164,7 @@
                                     </tableColumn>
                                     <tableColumn width="51" minWidth="10" maxWidth="3.4028234663852886e+38" id="RWj-cp-eeb">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="% MEM">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -197,7 +197,7 @@
                                     </tableColumn>
                                     <tableColumn width="37" minWidth="10" maxWidth="3.4028234663852886e+38" id="FtY-Xg-xLF">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="State">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -230,7 +230,7 @@
                                     </tableColumn>
                                     <tableColumn width="282" minWidth="10" maxWidth="3.4028234663852886e+38" id="c8w-pb-3Vq">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="User">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableHeaderCell>
@@ -278,12 +278,24 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sVU-8F-7ye">
+                    <rect key="frame" x="700" y="-1" width="59" height="32"/>
+                    <buttonCell key="cell" type="push" title="Kill" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pdM-XW-obe">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="killProcess:" target="-2" id="dho-bF-vk8"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="KFq-X3-l0U" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="a3V-gt-tRM"/>
                 <constraint firstItem="KFq-X3-l0U" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="bWT-Dq-EJ1"/>
+                <constraint firstItem="sVU-8F-7ye" firstAttribute="top" secondItem="KFq-X3-l0U" secondAttribute="bottom" constant="6" id="hUg-M4-VCc"/>
+                <constraint firstAttribute="bottom" secondItem="sVU-8F-7ye" secondAttribute="bottom" constant="6" id="jpJ-X6-gCg"/>
                 <constraint firstAttribute="trailing" secondItem="KFq-X3-l0U" secondAttribute="trailing" id="qeh-NA-fnK"/>
-                <constraint firstAttribute="bottom" secondItem="KFq-X3-l0U" secondAttribute="bottom" id="xde-vP-gFH"/>
+                <constraint firstAttribute="trailing" secondItem="sVU-8F-7ye" secondAttribute="trailing" constant="31" id="yFB-Bp-Ghu"/>
             </constraints>
             <point key="canvasLocation" x="151" y="225.5"/>
         </customView>

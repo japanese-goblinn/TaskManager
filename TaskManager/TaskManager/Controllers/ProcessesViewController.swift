@@ -12,15 +12,36 @@ class ProcessesViewController: NSViewController {
     
     @IBOutlet weak var tableView: NSTableView!
         
+    @IBAction func killProcess(_ sender: NSButton) {
+        DispatchQueue.main.async { [weak self] in
+            guard let pid = self?.lastSelectedProcess?.pid
+                else { return }
+            self?.lastSelectedProcess = nil
+            Service.killProcess(by: pid)
+        }
+    }
+    
+    private var lastSelectedProcess: Process?
+    
     private var processes: [Process]? {
         willSet {
             tableView.reloadData()
+            guard
+                let process = lastSelectedProcess,
+                let index = newValue?.firstIndex(where: { $0.pid == process.pid })
+            else { return }
+            tableView.selectRowIndexes(IndexSet(arrayLiteral: index), byExtendingSelection: true)
         }
+    }
+    
+    @objc private func onRowClicked() {
+        let index = tableView.selectedRow
+        lastSelectedProcess = processes?[index]
     }
     
     private func observingProcessesInfo() {
         DispatchQueue.global().async {
-            Service.processesInfoOutput(sleep: 2) { processes in
+            Service.processesInfoOutput(sleep: 3) { processes in
                 DispatchQueue.main.async { [weak self] in
                     self?.processes = processes
                 }
@@ -30,9 +51,10 @@ class ProcessesViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        observingProcessesInfo()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.action = #selector(onRowClicked)
+        observingProcessesInfo()
     }
 }
 
@@ -63,9 +85,7 @@ extension ProcessesViewController: NSTableViewDelegate {
         guard
             processes?.indices.contains(row) ?? false,
             let item = processes?[row]
-        else {
-            return nil
-        }
+        else { return nil }
         
         if tableColumn == tableView.tableColumns[0] {
             text = "\(item.pid)"
@@ -89,10 +109,10 @@ extension ProcessesViewController: NSTableViewDelegate {
             text = "\(item.user)"
             cellIdentifier = CellIdentifiers.userCell
         }
-        guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NSTableCellView
-        else {
-            return nil
-        }
+        guard let cell = tableView.makeView(
+                withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier),
+                owner: nil) as? NSTableCellView
+            else { return nil }
         cell.textField?.stringValue = text
         return cell
     }
