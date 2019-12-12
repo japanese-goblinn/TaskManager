@@ -1,5 +1,7 @@
 # TaskManager
 
+![](./media/icon.png)
+
 ## Постановка задачи
 
 Написать менеджер процессов для macOS, который будет иметь следующие функциональные возможности:
@@ -30,13 +32,10 @@
 
 ### Интерфейс
 
-![](./screenshots/interface.png)
+![](./media/interface.png)
 
 ### Использование
 
-![](./screenshots/usage.gif)
-
-
-
+![](./media/usage.gif)
 
 
