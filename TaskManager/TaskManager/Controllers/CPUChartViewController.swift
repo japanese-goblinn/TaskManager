@@ -15,12 +15,6 @@ class CPUChartViewController: NSViewController
 {
     @IBOutlet var lineChartView: LineChartView!
     
-    private class CustomYAxisFormatter: IAxisValueFormatter {
-        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-            return "\(Int(value))%"
-        }
-    }
-    
     private lazy var sysUsage = [SystemInfo](
         repeating: SystemInfo(with: 0),
         count: 10
@@ -37,7 +31,7 @@ class CPUChartViewController: NSViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setUpPlot()
+        setUpChart()
         updateChart()
     }
     
@@ -45,35 +39,12 @@ class CPUChartViewController: NSViewController
     {
         self.lineChartView.animate(yAxisDuration: 0.5)
     }
+}
+
+extension CPUChartViewController: LineChartable {
     
-    private func setUpPlot() {
-        lineChartView.rightAxis.enabled = false
-        lineChartView.xAxis.enabled = false
-        lineChartView.leftAxis.labelTextColor = .white
-        lineChartView.legend.enabled = false
-        let y = lineChartView.leftAxis
-        y.valueFormatter = CustomYAxisFormatter()
-        y.axisMaximum = 100
-        y.axisMinimum = 0
-    }
-    
-    private func createPlot(
-        from data: [ChartDataEntry], with color: NSColor, and label: String
-    ) -> LineChartDataSet {
-        
-        let line = LineChartDataSet(entries: data, label: label)
-        line.mode = .cubicBezier
-        line.cubicIntensity = 0.2
-        line.fill = Fill(color: color)
-        line.colors = [color]
-        line.drawFilledEnabled = true
-        line.drawCirclesEnabled = false
-        line.drawValuesEnabled = false
-        return line
-    }
-    
-    private func updateChart() {
-        let sysLine = createPlot(
+    func updateChart() {
+        let sysLine = createChart(
             from: sysUsage
                 .enumerated()
                 .map {
@@ -83,7 +54,7 @@ class CPUChartViewController: NSViewController
             and: "System"
         )
         
-        let userLine = createPlot(
+        let userLine = createChart(
             from: sysUsage
                 .enumerated()
                 .map {

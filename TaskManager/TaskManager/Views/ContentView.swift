@@ -23,23 +23,24 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     Divider()
-                    VStack(alignment: .leading) {
-                        Text("CPU")
-                            .font(.headline)
-                            .bold()
-                            .padding(.top)
-                            .padding(.leading)
-                        Divider()
-                        HStack(alignment: .center) {
+                    VStack {
+                        VStack(alignment: .leading) {
+                            Text("CPU")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .bold()
+                            Divider()
+                        }
+                        HStack {
                             Text(viewModel.percentageUsage(for: .system))
                                 .bold()
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.red)
                                 .cornerRadius(24)
                             Text(viewModel.percentageUsage(for: .user))
                                 .bold()
                                 .padding()
-                                .background(Color.red)
+                                .background(Color.blue)
                                 .cornerRadius(24)
                             Text(viewModel.percentageUsage(for: .idle))
                                 .bold()
@@ -55,23 +56,29 @@ struct ContentView: View {
                     .padding(.top)
                 }
                 .padding()
-                HStack {
+                HStack(spacing: 20) {
                     VStack(alignment: .leading) {
                         Text("CPU Usage")
-                            .font(.title)
+                            .font(.headline)
                             .fontWeight(.bold)
                         Divider()
                         Spacer()
                         CPUChartViewControllerWrapper(viewModel: viewModel)
                     }
+                    .padding()
+                    .background(Color(red: 47/255, green: 48/255, blue: 50/255))
+                    .cornerRadius(20)
                     VStack(alignment: .leading) {
                         Text("Memory Usage")
-                            .font(.title)
+                            .font(.headline)
                             .fontWeight(.bold)
                         Divider()
                         Spacer()
                         MemoryChartViewControllerWrapper()
                     }
+                    .padding()
+                    .background(Color(red: 47/255, green: 48/255, blue: 50/255))
+                    .cornerRadius(20)
                 }
                 .padding()
             }

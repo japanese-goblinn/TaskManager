@@ -37,8 +37,7 @@ class Service {
         }
         
         static func ps(value: [String]) -> [Process] {
-            value
-                .dropFirst(1)
+            value.dropFirst(1)
                 .map {
                     $0.components(separatedBy: .whitespaces)
                         .filter { $0 != "" }
@@ -58,29 +57,31 @@ class Service {
     }
         
     static func systemInfoOutput(
-        sleep value: UInt32, complition: @escaping (SystemInfo) -> Void
+        sleep value: UInt32, completion: @escaping (SystemInfo) -> Void
     ) {
         while (true) {
             service?.request(command: "/usr/bin/top", with: ["-l", "1"]) { result in
-                complition(Parse.top(value: result))
+                completion(Parse.top(value: result))
             }
             sleep(value)
         }
     }
     
     static func processesInfoOutput(
-        sleep value: UInt32, complition: @escaping([Process]) -> Void
+        sleep value: UInt32, completion: @escaping([Process]) -> Void
     ) {
         while(true) {
             service?.request(command: "/bin/ps", with: ["aux", "-c"]) { result in
-                complition(Parse.ps(value: result))
+                completion(Parse.ps(value: result))
             }
             sleep(value)
         }
     }
     
-    static func killProcess(by pid: Int) {
-        service?.kill(by: pid)
+    static func killProcess(by pid: Int, failure: @escaping (Error?) -> Void) {
+        service?.kill(by: pid) { error in
+            failure(error)
+        }
     }
 }
 

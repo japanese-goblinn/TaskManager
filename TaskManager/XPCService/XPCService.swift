@@ -10,17 +10,15 @@ import Foundation
 
 class XPCService: NSObject, XPCServiceProtocol {
     
-    func kill(by pid: Int) {
+    func kill(by pid: Int, failure: (Error?) -> Void) {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/bash")
         process.arguments = ["-c", "kill -9 \(pid)"]
-        process.terminationHandler = { proc in
-            print("Process \(pid) was killed successfully")
-        }
         do {
             try process.run()
+            failure(nil)
         } catch {
-            print(error.localizedDescription)
+            failure(error)
         }
     }
     

@@ -13,11 +13,28 @@ class ProcessesViewController: NSViewController {
     @IBOutlet weak var tableView: NSTableView!
         
     @IBAction func killProcess(_ sender: NSButton) {
-        DispatchQueue.main.async { [weak self] in
-            guard let pid = self?.lastSelectedProcess?.pid
+        DispatchQueue.global().async { [weak self] in
+            guard
+                let pid = self?.lastSelectedProcess?.pid,
+                let name = self?.lastSelectedProcess?.name
                 else { return }
+            Service.killProcess(by: pid) { [name] error in
+                DispatchQueue.main.async {
+                    let alert = NSAlert()
+                    if let error = error {
+                        alert.messageText = "Error"
+                        alert.informativeText = error.localizedDescription
+                        alert.alertStyle = .critical
+                    } else {
+                        alert.messageText = "Success"
+                        alert.informativeText = "Process \(name) was killed successfully"
+                        alert.alertStyle = .informational
+                    }
+                    alert.addButton(withTitle: "OK")
+                    alert.runModal()
+                }
+            }
             self?.lastSelectedProcess = nil
-            Service.killProcess(by: pid)
         }
     }
     
@@ -29,8 +46,11 @@ class ProcessesViewController: NSViewController {
             guard
                 let process = lastSelectedProcess,
                 let index = newValue?.firstIndex(where: { $0.pid == process.pid })
-            else { return }
-            tableView.selectRowIndexes(IndexSet(arrayLiteral: index), byExtendingSelection: true)
+                else { return }
+            tableView.selectRowIndexes(
+                IndexSet(arrayLiteral: index),
+                byExtendingSelection: true
+            )
         }
     }
     
@@ -87,7 +107,7 @@ extension ProcessesViewController: NSTableViewDelegate {
         guard
             processes?.indices.contains(row) ?? false,
             let item = processes?[row]
-        else { return nil }
+            else { return nil }
         
         if tableColumn == tableView.tableColumns[0] {
             text = "\(item.pid)"

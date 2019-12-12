@@ -23,53 +23,6 @@ class MemoryChartViewController: NSViewController {
         }
     }
     
-    private class CustomYAxisFormatter: IAxisValueFormatter {
-        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-            return "\(Int(value))%"
-        }
-    }
-    
-    private func setUpPlot() {
-        lineChartView.rightAxis.enabled = false
-        lineChartView.xAxis.enabled = false
-        lineChartView.legend.enabled = false
-        lineChartView.leftAxis.labelTextColor = .white
-        let y = lineChartView.leftAxis
-        y.valueFormatter = CustomYAxisFormatter()
-        y.axisMaximum = 100
-        y.axisMinimum = 0
-    }
-    
-    private func createPlot(
-        from data: [ChartDataEntry], with color: NSColor, and label: String
-    ) -> LineChartDataSet {
-        
-        let line = LineChartDataSet(entries: data, label: label)
-        line.mode = .cubicBezier
-        line.cubicIntensity = 0.2
-        line.fill = Fill(color: color)
-        line.colors = [color]
-        line.drawFilledEnabled = true
-        line.drawCirclesEnabled = false
-        line.drawValuesEnabled = false
-        return line
-    }
-    
-    private func updateChart() {
-        let memLine = createPlot(
-            from: memUsageSum
-                .enumerated()
-                .map { i, memPer in
-                    ChartDataEntry(x: Double(i), y: Double(memPer))
-                },
-            with: .systemGreen,
-            and: "Memory"
-        )
-        let data = LineChartData()
-        data.addDataSet(memLine)
-        lineChartView.data = data
-    }
-    
     private func observingProcessesInfo() {
         DispatchQueue.global().async {
             Service.processesInfoOutput(sleep: 2) { processes in
@@ -85,8 +38,30 @@ class MemoryChartViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         observingProcessesInfo()
-        setUpPlot()
+        setUpChart()
         updateChart()
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        lineChartView.animate(yAxisDuration: 0.5)
+    }
+}
+
+extension MemoryChartViewController: LineChartable {
+    
+    func updateChart() {
+        let memLine = createChart(
+            from: memUsageSum
+                .enumerated()
+                .map { i, memPer in
+                    ChartDataEntry(x: Double(i), y: Double(memPer))
+                },
+            with: .systemGreen,
+            and: "Memory"
+        )
+        let data = LineChartData()
+        data.addDataSet(memLine)
+        lineChartView.data = data
+    }
 }

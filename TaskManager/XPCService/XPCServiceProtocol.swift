@@ -10,7 +10,7 @@ import Foundation
 
 @objc public protocol XPCServiceProtocol {
     
-    func kill(by pid: Int)
+    func kill(by pid: Int, failure: @escaping (Error?) -> Void)
     
     func request(command: String, with arguments: [String], completion: @escaping ([String]) -> Void)
 
