@@ -50,7 +50,7 @@ class CPUChartViewController: NSViewController
         lineChartView.rightAxis.enabled = false
         lineChartView.xAxis.enabled = false
         lineChartView.leftAxis.labelTextColor = .white
-        lineChartView.legend.textColor = .white
+        lineChartView.legend.enabled = false
         let y = lineChartView.leftAxis
         y.valueFormatter = CustomYAxisFormatter()
         y.axisMaximum = 100

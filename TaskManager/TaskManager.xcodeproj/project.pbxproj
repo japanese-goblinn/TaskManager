@@ -30,6 +30,9 @@
 		CEA9CDDB239E73B700622687 /* NSRegualarExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDDA239E73B700622687 /* NSRegualarExpressionExtension.swift */; };
 		CEA9CDE2239ED48600622687 /* CPUChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9CDE0239ED48600622687 /* CPUChartViewController.swift */; };
 		CEA9CDE3239ED48600622687 /* CPUChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA9CDE1239ED48600622687 /* CPUChartViewController.xib */; };
+		CEEE5CA923A1ABA90088F4A8 /* MemoryChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5CA723A1ABA90088F4A8 /* MemoryChartViewController.swift */; };
+		CEEE5CAA23A1ABA90088F4A8 /* MemoryChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5CA823A1ABA90088F4A8 /* MemoryChartViewController.xib */; };
+		CEEE5CAC23A1AC560088F4A8 /* MemoryChartViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5CAB23A1AC560088F4A8 /* MemoryChartViewControllerWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		CEA9CDDA239E73B700622687 /* NSRegualarExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegualarExpressionExtension.swift; sourceTree = "<group>"; };
 		CEA9CDE0239ED48600622687 /* CPUChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUChartViewController.swift; sourceTree = "<group>"; };
 		CEA9CDE1239ED48600622687 /* CPUChartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CPUChartViewController.xib; sourceTree = "<group>"; };
+		CEEE5CA723A1ABA90088F4A8 /* MemoryChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryChartViewController.swift; sourceTree = "<group>"; };
+		CEEE5CA823A1ABA90088F4A8 /* MemoryChartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoryChartViewController.xib; sourceTree = "<group>"; };
+		CEEE5CAB23A1AC560088F4A8 /* MemoryChartViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryChartViewControllerWrapper.swift; sourceTree = "<group>"; };
 		CF42186837E87D3F13902849 /* Pods_TaskManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E455EBFE6A4ED1CF645451 /* Pods-TaskManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManager.debug.xcconfig"; path = "Target Support Files/Pods-TaskManager/Pods-TaskManager.debug.xcconfig"; sourceTree = "<group>"; };
 		FE7B84C9C6AD6436EE5CF0D2 /* Pods-XPCService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XPCService.release.xcconfig"; path = "Target Support Files/Pods-XPCService/Pods-XPCService.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 			children = (
 				CE7B4C02239AEA3700E336FE /* ContentView.swift */,
 				CE958886239ED9A0009E15B5 /* CPUChartViewControllerWrapper.swift */,
+				CEEE5CAB23A1AC560088F4A8 /* MemoryChartViewControllerWrapper.swift */,
 				CE95888C239EE38E009E15B5 /* ProcessesViewControllerWrapper.swift */,
 			);
 			path = Views;
@@ -229,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA9CDE0239ED48600622687 /* CPUChartViewController.swift */,
+				CEEE5CA723A1ABA90088F4A8 /* MemoryChartViewController.swift */,
 				CE958888239EE2E8009E15B5 /* ProcessesViewController.swift */,
 			);
 			path = Controllers;
@@ -239,6 +247,7 @@
 			children = (
 				CEA9CDE1239ED48600622687 /* CPUChartViewController.xib */,
 				CE958889239EE2E8009E15B5 /* ProcessesViewController.xib */,
+				CEEE5CA823A1ABA90088F4A8 /* MemoryChartViewController.xib */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 			files = (
 				CE7B4C0B239AEA3F00E336FE /* Main.storyboard in Resources */,
 				CEA9CDE3239ED48600622687 /* CPUChartViewController.xib in Resources */,
+				CEEE5CAA23A1ABA90088F4A8 /* MemoryChartViewController.xib in Resources */,
 				CE95888B239EE2E8009E15B5 /* ProcessesViewController.xib in Resources */,
 				CE7B4C08239AEA3F00E336FE /* Preview Assets.xcassets in Resources */,
 				CE7B4C05239AEA3F00E336FE /* Assets.xcassets in Resources */,
@@ -421,6 +431,8 @@
 				CEA9CDDB239E73B700622687 /* NSRegualarExpressionExtension.swift in Sources */,
 				CE958887239ED9A0009E15B5 /* CPUChartViewControllerWrapper.swift in Sources */,
 				CE95888D239EE38E009E15B5 /* ProcessesViewControllerWrapper.swift in Sources */,
+				CEEE5CA923A1ABA90088F4A8 /* MemoryChartViewController.swift in Sources */,
+				CEEE5CAC23A1AC560088F4A8 /* MemoryChartViewControllerWrapper.swift in Sources */,
 				CE207C8E239BFEAA003E4C04 /* Service.swift in Sources */,
 				CE7B4C03239AEA3700E336FE /* ContentView.swift in Sources */,
 				CE7B4C01239AEA3700E336FE /* AppDelegate.swift in Sources */,

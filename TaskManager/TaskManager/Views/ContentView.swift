@@ -30,23 +30,29 @@ struct ContentView: View {
                             .padding(.top)
                             .padding(.leading)
                         Divider()
-                        Text(viewModel.percentageUsage(for: .system))
-                            .bold()
-                            .padding(.leading)
-                        Text(viewModel.percentageUsage(for: .user))
-                            .bold()
-                            .padding(.top)
-                            .padding(.leading)
-                        Text(viewModel.percentageUsage(for: .idle))
-                            .bold()
-                            .padding(.top)
-                            .padding(.bottom)
-                            .padding(.leading)
+                        HStack(alignment: .center) {
+                            Text(viewModel.percentageUsage(for: .system))
+                                .bold()
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(24)
+                            Text(viewModel.percentageUsage(for: .user))
+                                .bold()
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(24)
+                            Text(viewModel.percentageUsage(for: .idle))
+                                .bold()
+                                .padding()
+                                .background(Color.gray)
+                                .cornerRadius(24)
+                        }
+                        .padding()
                     }
+                    .padding()
                     .background(Color(red: 47/255, green: 48/255, blue: 50/255))
-                    .cornerRadius(25)
+                    .cornerRadius(20)
                     .padding(.top)
-                    .padding(.bottom)
                 }
                 .padding()
                 HStack {
@@ -64,7 +70,7 @@ struct ContentView: View {
                             .fontWeight(.bold)
                         Divider()
                         Spacer()
-                        
+                        MemoryChartViewControllerWrapper()
                     }
                 }
                 .padding()
