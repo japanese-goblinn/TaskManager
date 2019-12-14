@@ -56,9 +56,8 @@ class Service {
         }
     }
         
-    static func systemInfoOutput(
-        sleep value: UInt32, completion: @escaping (SystemInfo) -> Void
-    ) {
+    static func systemInfoOutput(sleep value: UInt32,
+                                 completion: @escaping (SystemInfo) -> Void) {
         while (true) {
             service?.request(command: "/usr/bin/top", with: ["-l", "1"]) { result in
                 completion(Parse.top(value: result))
@@ -67,9 +66,8 @@ class Service {
         }
     }
     
-    static func processesInfoOutput(
-        sleep value: UInt32, completion: @escaping([Process]) -> Void
-    ) {
+    static func processesInfoOutput(sleep value: UInt32,
+                                    completion: @escaping([Process]) -> Void) {
         while(true) {
             service?.request(command: "/bin/ps", with: ["aux", "-c"]) { result in
                 completion(Parse.ps(value: result))
@@ -78,7 +76,8 @@ class Service {
         }
     }
     
-    static func killProcess(by pid: Int, failure: @escaping (Error?) -> Void) {
+    static func killProcess(by pid: Int,
+                            failure: @escaping (Error?) -> Void) {
         service?.kill(by: pid) { error in
             failure(error)
         }

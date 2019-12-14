@@ -14,15 +14,10 @@ struct MemoryChartViewControllerWrapper: NSViewControllerRepresentable {
     typealias NSViewControllerType = MemoryChartViewController
     typealias MemoryChartViewControllerContext = NSViewControllerRepresentableContext<MemoryChartViewControllerWrapper>
     
-    func makeNSViewController(
-        context: MemoryChartViewControllerContext
-    ) -> MemoryChartViewController {
-        
+    func makeNSViewController(context: MemoryChartViewControllerContext) -> MemoryChartViewController {
         MemoryChartViewController()
     }
     
-    func updateNSViewController(
-        _ nsViewController: MemoryChartViewController,
-        context: MemoryChartViewControllerContext
-    ) {}
+    func updateNSViewController(_ nsViewController: MemoryChartViewController,
+                                context: MemoryChartViewControllerContext) {}
 }

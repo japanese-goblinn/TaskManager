@@ -29,9 +29,8 @@ struct CPUChartViewControllerWrapper: NSViewControllerRepresentable {
         CPUChartViewController()
     }
         
-    func updateNSViewController(
-        _ nsViewController: CPUChartViewController, context: LineChartContext
-    ) {
+    func updateNSViewController(_ nsViewController: CPUChartViewController,
+                                context: LineChartContext) {
         guard let value = viewModel.sysInfo else { return }
         nsViewController.lastSystemInfo = value
     }
