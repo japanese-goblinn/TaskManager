@@ -11,8 +11,8 @@ import Cocoa
 import Charts
 
 
-class CPUChartViewController: NSViewController
-{
+class CPUChartViewController: NSViewController {
+    
     @IBOutlet var lineChartView: LineChartView!
     
     private lazy var sysUsage = [SystemInfo](
@@ -28,21 +28,18 @@ class CPUChartViewController: NSViewController
         }
     }
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setUpChart()
         updateChart()
     }
     
-    override func viewWillAppear()
-    {
+    override func viewWillAppear() {
         self.lineChartView.animate(yAxisDuration: 0.5)
     }
 }
 
 extension CPUChartViewController: LineChartable {
-    
     func updateChart() {
         let sysLine = createChart(
             from: sysUsage

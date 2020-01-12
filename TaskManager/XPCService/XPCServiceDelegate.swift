@@ -9,9 +9,10 @@
 import Foundation
 
 class XPCServiceDelegate: NSObject, NSXPCListenerDelegate {
-    
-    func listener(_ listener: NSXPCListener,
-                  shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
+    func listener(
+        _ listener: NSXPCListener,
+        shouldAcceptNewConnection newConnection: NSXPCConnection
+    ) -> Bool {
         let exportedObject = XPCService()
         newConnection.exportedInterface = NSXPCInterface(with: XPCServiceProtocol.self)
         newConnection.exportedObject = exportedObject

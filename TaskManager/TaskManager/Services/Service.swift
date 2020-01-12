@@ -10,7 +10,7 @@ import Foundation
 import XPCService
 
 class Service {
-        
+    
     private static var regex = try? NSRegularExpression(pattern: "[0-9]{1,3}.[0-9]{1,}%")
     
     private static var service: XPCServiceProtocol? {
@@ -22,6 +22,42 @@ class Service {
         } as? XPCServiceProtocol
         return service
     }
+    
+    static func systemInfoOutput(
+        sleep value: UInt32,
+        completion: @escaping (SystemInfo) -> Void
+    ) {
+        while (true) {
+            service?.request(command: "/usr/bin/top", with: ["-l", "1"]) { result in
+                completion(Parse.top(value: result))
+            }
+            sleep(value)
+        }
+    }
+    
+    static func processesInfoOutput(
+        sleep value: UInt32,
+        completion: @escaping([Process]) -> Void
+    ) {
+        while(true) {
+            service?.request(command: "/bin/ps", with: ["aux", "-c"]) { result in
+                completion(Parse.ps(value: result))
+            }
+            sleep(value)
+        }
+    }
+    
+    static func killProcess(
+        by pid: Int,
+        failure: @escaping (Error?) -> Void
+    ) {
+        service?.kill(by: pid) { error in
+            failure(error)
+        }
+    }
+}
+
+extension Service {
     
     private struct Parse {
         
@@ -37,10 +73,10 @@ class Service {
         }
         
         static func ps(value: [String]) -> [Process] {
-            value.dropFirst(1)
+            return value
+                .dropFirst(1)
                 .map {
-                    $0.components(separatedBy: .whitespaces)
-                        .filter { $0 != "" }
+                    $0.components(separatedBy: .whitespaces).filter { $0 != "" }
                 }
                 .map {
                     Process(
@@ -52,34 +88,7 @@ class Service {
                         state: $0[7],
                         user: $0[0]
                     )
-            }
-        }
-    }
-        
-    static func systemInfoOutput(sleep value: UInt32,
-                                 completion: @escaping (SystemInfo) -> Void) {
-        while (true) {
-            service?.request(command: "/usr/bin/top", with: ["-l", "1"]) { result in
-                completion(Parse.top(value: result))
-            }
-            sleep(value)
-        }
-    }
-    
-    static func processesInfoOutput(sleep value: UInt32,
-                                    completion: @escaping([Process]) -> Void) {
-        while(true) {
-            service?.request(command: "/bin/ps", with: ["aux", "-c"]) { result in
-                completion(Parse.ps(value: result))
-            }
-            sleep(value)
-        }
-    }
-    
-    static func killProcess(by pid: Int,
-                            failure: @escaping (Error?) -> Void) {
-        service?.kill(by: pid) { error in
-            failure(error)
+                }
         }
     }
 }

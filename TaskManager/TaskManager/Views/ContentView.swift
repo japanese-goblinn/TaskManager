@@ -97,7 +97,7 @@ struct ContentView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear {
+        .onAppear() {
             self.viewModel.observingSystemInfo()
         }
     }

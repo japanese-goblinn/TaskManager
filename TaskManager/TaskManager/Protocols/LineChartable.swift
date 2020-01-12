@@ -21,12 +21,13 @@ protocol LineChartable {
     
     func setUpChart()
     
-    func createChart(from data: [ChartDataEntry],
-                     with color: NSColor,
-                     and label: String) -> LineChartDataSet
+    func createChart(
+        from data: [ChartDataEntry],
+        with color: NSColor,
+        and label: String
+    ) -> LineChartDataSet
     
     func updateChart()
-    
 }
 
 extension LineChartable {
@@ -43,9 +44,11 @@ extension LineChartable {
         y.axisMinimum = 0
     }
     
-    func createChart(from data: [ChartDataEntry],
-                     with color: NSColor,
-                     and label: String) -> LineChartDataSet {
+    func createChart(
+        from data: [ChartDataEntry],
+        with color: NSColor,
+        and label: String
+    ) -> LineChartDataSet {
         let line = LineChartDataSet(entries: data, label: label)
         line.mode = .cubicBezier
         line.cubicIntensity = 0.2

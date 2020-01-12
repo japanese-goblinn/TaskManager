@@ -9,7 +9,6 @@
 import Foundation
 
 extension String {
-    
     subscript(range: NSRange) -> String {
         (self as NSString).substring(with: range)
     }

@@ -10,14 +10,15 @@ import Cocoa
 
 class ProcessesViewController: NSViewController {
     
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet private weak var tableView: NSTableView!
         
-    @IBAction func killProcess(_ sender: NSButton) {
+    @IBAction private func killProcess(_ sender: NSButton) {
         DispatchQueue.global().async { [weak self] in
             guard
                 let pid = self?.lastSelectedProcess?.pid,
                 let name = self?.lastSelectedProcess?.name
                 else { return }
+            
             Service.killProcess(by: pid) { [name] error in
                 DispatchQueue.main.async {
                     let alert = NSAlert()
@@ -81,7 +82,6 @@ class ProcessesViewController: NSViewController {
 }
 
 extension ProcessesViewController: NSTableViewDataSource {
-    
     func numberOfRows(in tableView: NSTableView) -> Int {
         return processes?.count ?? 0
     }
@@ -100,14 +100,13 @@ extension ProcessesViewController: NSTableViewDelegate {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        
-        var text: String = ""
-        var cellIdentifier: String = ""
-
         guard
             processes?.indices.contains(row) ?? false,
             let item = processes?[row]
             else { return nil }
+        
+        var text: String = ""
+        var cellIdentifier: String = ""
         
         if tableColumn == tableView.tableColumns[0] {
             text = "\(item.pid)"
@@ -132,8 +131,9 @@ extension ProcessesViewController: NSTableViewDelegate {
             cellIdentifier = CellIdentifiers.userCell
         }
         guard let cell = tableView.makeView(
-                withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier),
-                owner: nil) as? NSTableCellView
+                    withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier),
+                    owner: nil
+                ) as? NSTableCellView
             else { return nil }
         cell.textField?.stringValue = text
         return cell

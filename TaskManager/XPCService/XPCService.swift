@@ -10,8 +10,10 @@ import Foundation
 
 class XPCService: NSObject, XPCServiceProtocol {
     
-    func kill(by pid: Int,
-              failure: (Error?) -> Void) {
+    func kill(
+        by pid: Int,
+        failure: (Error?) -> Void
+    ) {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/bash")
         process.arguments = ["-c", "kill -9 \(pid)"]
@@ -23,9 +25,11 @@ class XPCService: NSObject, XPCServiceProtocol {
         }
     }
     
-    func request(command: String,
-                 with arguments: [String],
-                 completion: @escaping ([String]) -> Void) {
+    func request(
+        command: String,
+        with arguments: [String],
+        completion: @escaping ([String]) -> Void
+    ) {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: command)
         process.arguments = arguments

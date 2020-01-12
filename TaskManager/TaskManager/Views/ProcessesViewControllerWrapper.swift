@@ -10,14 +10,20 @@ import Cocoa
 import SwiftUI
 
 struct ProcessesViewControllerWrapper: NSViewControllerRepresentable {
-        
-    typealias NSViewControllerType = ProcessesViewController
-    typealias ProcessesViewControllerContext = NSViewControllerRepresentableContext<ProcessesViewControllerWrapper>
     
-    func makeNSViewController(context: ProcessesViewControllerContext) -> ProcessesViewController {
+    func makeNSViewController(
+        context: ProcessesViewControllerContext
+    ) -> ProcessesViewController {
         ProcessesViewController()
     }
     
-    func updateNSViewController(_ nsViewController: ProcessesViewController,
-                                context: ProcessesViewControllerContext) {}
+    func updateNSViewController(
+        _ nsViewController: ProcessesViewController,
+        context: ProcessesViewControllerContext
+    ) {}
+}
+
+extension ProcessesViewControllerWrapper {
+    typealias NSViewControllerType = ProcessesViewController
+    typealias ProcessesViewControllerContext = NSViewControllerRepresentableContext<ProcessesViewControllerWrapper>
 }

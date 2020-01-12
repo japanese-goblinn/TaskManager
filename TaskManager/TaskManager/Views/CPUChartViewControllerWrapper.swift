@@ -10,6 +10,7 @@ import Cocoa
 import SwiftUI
 
 class SystemCoordinator: NSObject {
+    
     var data: ViewModel
 
     init(data: ViewModel) {
@@ -21,16 +22,15 @@ struct CPUChartViewControllerWrapper: NSViewControllerRepresentable {
     
     @ObservedObject var viewModel: ViewModel
     
-    typealias NSViewControllerType = CPUChartViewController
-    typealias LineChartContext = NSViewControllerRepresentableContext<CPUChartViewControllerWrapper>
-    
     func makeNSViewController(context: LineChartContext) -> CPUChartViewController {
         
         CPUChartViewController()
     }
         
-    func updateNSViewController(_ nsViewController: CPUChartViewController,
-                                context: LineChartContext) {
+    func updateNSViewController(
+        _ nsViewController: CPUChartViewController,
+        context: LineChartContext
+    ) {
         guard let value = viewModel.sysInfo else { return }
         nsViewController.lastSystemInfo = value
     }
@@ -39,5 +39,10 @@ struct CPUChartViewControllerWrapper: NSViewControllerRepresentable {
         SystemCoordinator(data: viewModel)
     }
     
+}
+
+extension CPUChartViewControllerWrapper {
+    typealias NSViewControllerType = CPUChartViewController
+    typealias LineChartContext = NSViewControllerRepresentableContext<CPUChartViewControllerWrapper>
 }
 
