@@ -23,7 +23,6 @@ struct CPUChartViewControllerWrapper: NSViewControllerRepresentable {
     @ObservedObject var viewModel: ViewModel
     
     func makeNSViewController(context: LineChartContext) -> CPUChartViewController {
-        
         CPUChartViewController()
     }
         
